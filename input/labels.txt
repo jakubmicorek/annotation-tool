@@ -1,3 +1,6 @@
 TagID,Tag
 0,normal
 1,anomaly
+2,fall
+3,throw
+
