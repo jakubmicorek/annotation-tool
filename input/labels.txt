@@ -6,5 +6,3 @@ TagID,Tag
 4,bike
 5,pull
 6,jumping
-
-
