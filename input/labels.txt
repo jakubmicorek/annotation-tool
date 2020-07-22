@@ -2,5 +2,9 @@ TagID,Tag
 0,normal
 1,anomaly
 2,fall
-3,throw
+3,sit
+4,bike
+5,pull
+6,jumping
+
 
