@@ -39,7 +39,8 @@ while cap.isOpened():
     if not ret:
         break
 
-    if cv2.waitKey(1) & 0xFF == ord('q'):
+    k = cv2.waitKey(1)
+    if k & 0xFF == ord('q') or k == 27:
         break
 
     resize_scale = 0.25
