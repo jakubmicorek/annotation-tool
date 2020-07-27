@@ -41,9 +41,15 @@ while cap.isOpened():
     if cv2.waitKey(1) & 0xFF == ord('q'):
         break
 
+    resize_scale = 0.25
+    frame = frame[:, 255:-305]  # crop to ROI
+    frame = cv2.resize(frame, (0, 0), fx=resize_scale, fy=resize_scale)  # resize img
+    # print(frame.shape)
+
     label = labels[frame_number] if frame_number in labels else "no label"
     color = (0, 0, 255) if frame_number in labels else (255, 0, 255)
     frame = cv2.putText(frame, label, (50, 50), cv2.FONT_HERSHEY_SIMPLEX, 1, color)
+
     cv2.imshow('frame', frame)
 
     if frame_number not in labels:
