@@ -23,6 +23,7 @@ cap = cv2.VideoCapture(f'{args.input_folder}/{args.video_name}')
 
 if args.ouput_folder_name not in os.listdir(f'{args.input_folder}'):
     os.mkdir(f'{args.input_folder}/{args.ouput_folder_name}')
+if "video" not in os.listdir(f'{args.input_folder}/{args.ouput_folder_name}'):
     os.mkdir(f'{args.input_folder}/{args.ouput_folder_name}/video')
     os.mkdir(f'{args.input_folder}/{args.ouput_folder_name}/video/{video_id}')
     with open(f'{args.input_folder}/{args.ouput_folder_name}/video_{video_id}.txt', "w") as f:
