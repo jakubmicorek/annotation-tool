@@ -6,3 +6,6 @@ TagID,Tag
 4,bike
 5,pull
 6,jumping
+7,run
+8,background
+

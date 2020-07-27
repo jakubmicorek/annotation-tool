@@ -33,6 +33,7 @@ with open(file_name, "r") as f:
 print("labels:", labels)
 frame_number = 0
 old_label = None
+color_roll_idx = 0
 while cap.isOpened():
     ret, frame = cap.read()
     if not ret:
@@ -42,13 +43,14 @@ while cap.isOpened():
         break
 
     resize_scale = 0.25
+    resize_scale = 1
     frame = frame[:, 255:-305]  # crop to ROI
     frame = cv2.resize(frame, (0, 0), fx=resize_scale, fy=resize_scale)  # resize img
     # print(frame.shape)
 
     label = labels[frame_number] if frame_number in labels else "no label"
-    color = (0, 0, 255) if frame_number in labels else (255, 0, 255)
-    frame = cv2.putText(frame, label, (50, 50), cv2.FONT_HERSHEY_SIMPLEX, 1, color)
+    color = np.eye(3)[color_roll_idx % 3] * 255 if frame_number in labels else (255, 255, 255)
+    frame = cv2.putText(frame, f"{label} {frame_number}", (50, 50), cv2.FONT_HERSHEY_SIMPLEX, 1, color)
 
     cv2.imshow('frame', frame)
 
@@ -56,11 +58,16 @@ while cap.isOpened():
         print("unlabeled frame:", frame_number)
         cv2.waitKey(0)
 
-    # if old_label != label:
-    #     cv2.waitKey(0)
+    if old_label != label:
+        # cv2.waitKey(0)
+        color_roll_idx += 1
 
-    # cv2.waitKey(70)
-    cv2.waitKey(2)
+    cv2.waitKey(50)
+    # if frame_number > 680:
+    #     cv2.waitKey(200)
+    # else:
+    #     cv2.waitKey(1)
+    # cv2.waitKey(2)
     # cv2.waitKey(1)
     frame_number += 1
     old_label = label
