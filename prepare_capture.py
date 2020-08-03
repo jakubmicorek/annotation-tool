@@ -48,6 +48,10 @@ with open(f'{args.input_folder}/{args.ouput_folder_name}/frames_{video_id}.txt',
         frame_name = str(frame_number).zfill(12)
         frame_name = f"{frame_name}.jpg"
 
+        frame = frame[:, 255:-305]  # crop to ROI
+        # frame = cv2.resize(frame, (480, 480))  # resize img
+        frame = cv2.resize(frame, (224, 224))  # resize img
+
         cv2.imwrite(f'{args.input_folder}/{args.ouput_folder_name}/video/{video_id}/{frame_name}', frame)
         f.write(f"{video_id},{frame_name},{frame_number}\n")
 
